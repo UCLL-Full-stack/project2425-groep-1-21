@@ -130,17 +130,6 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
                     {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
                 </label>
                 <label className="block mb-3">
-                    Rol:
-                    <select
-                        className="w-full mt-1 p-2 border border-gray-300 rounded bg-gray-200 shadow-md"
-                        value={editedLeiding.rol}
-                        onChange={(e) => setEditedLeiding({ ...editedLeiding, rol: e.target.value })}
-                    >
-                        <option value="HOOFDLEIDING">HOOFDLEIDING</option>
-                        <option value="LEIDING">LEIDING</option>
-                    </select>
-                </label>
-                <label className="block mb-3">
                     Groep:
                     <input
                         type="text"
