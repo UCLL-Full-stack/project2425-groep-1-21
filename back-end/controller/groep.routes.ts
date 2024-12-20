@@ -100,7 +100,35 @@ const groepRouter = express.Router();
  */
 groepRouter.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const groepen = await groepService.getAllGroepen();
+        const groepen = await groepService.getAllGroepen(false);
+        res.status(200).json(groepen);
+    } catch (e) {
+        next(e);
+    }
+});
+
+/**
+ * @swagger
+ * /groep/all:
+ *  get:
+ *    summary: Geeft alle groepen terug
+ *    tags:
+ *     - groep
+ *    security:
+ *     - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: OK
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: "#/components/schemas/Groep"
+ */
+groepRouter.get("/all", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const groepen = await groepService.getAllGroepen(true);
         res.status(200).json(groepen);
     } catch (e) {
         next(e);

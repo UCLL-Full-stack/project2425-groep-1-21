@@ -17,6 +17,7 @@ const Leiders: React.FC = () => {
         setError("");
         try {
             const response = await LeidingService.getLeiding();
+            console.log(response);
             setLeiders(response);
         } catch (error) {
             if ((error as any).message === "Failed to get leiding.") {
@@ -48,6 +49,13 @@ const Leiders: React.FC = () => {
         }
     };
 
+    const saved = (success: boolean) => {
+        setShowEditModal(false);
+        if (success) {
+            getLeiders();
+        }
+    };
+
     useEffect(() => {
         getLeiders();
     }, []);
@@ -72,7 +80,7 @@ const Leiders: React.FC = () => {
             {showEditModal && selectedLeiding && (
                 <LeidingEditModal
                     leiding={selectedLeiding}
-                    onClose={() => setShowEditModal(false)}
+                    onClose={() => saved(true)}
                     onEdit={handleEditLeiding}
                 />
             )}

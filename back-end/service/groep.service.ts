@@ -5,9 +5,15 @@ import { capitalizeFirstLetter } from "../util/stringUtils";
 import leidingDb from "../repository/leiding.db";
 import { Leiding, PublicLeiding } from "../model/leiding";
 
-const getAllGroepen = async (): Promise<Groep[] | undefined> => {
+const getAllGroepen = async (all: boolean): Promise<Groep[] | undefined> => {
     const groepen = await groepDB.getAllGroepen();
-    return groepen.slice(1);
+    if (!groepen) {
+        throw new Error('Groepen not found');
+    }
+    if (!all) {
+        return groepen.slice(1);
+    }
+    return groepen;
 }
 
 const getActiviteitenForGroep = async (naam: string): Promise<Activiteit[] | undefined> => {

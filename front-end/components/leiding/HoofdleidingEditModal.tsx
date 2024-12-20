@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Leiding } from '@/types';
+import React, { useEffect, useState } from 'react';
+import { Groep, Leiding } from '@/types';
 import LeidingService from '@/services/LeidingService';
+import GroepService from '@/services/GroepService';
 
 type Props = {
     leiding: Leiding;
@@ -11,6 +12,7 @@ type Props = {
 const HoofdleidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
     const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser') || '{}');
     const isEditingOwnProfile = loggedInUser.totem === leiding.totem;
+    const [selected, setSelected] = useState<string>("Losse leden");
 
     const [editedLeiding, setEditedLeiding] = useState({
         naam: leiding.naam,
@@ -23,6 +25,7 @@ const HoofdleidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) =>
     const [surnameError, setSurnameError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [groepen, setGroepen] = useState<Groep[]>([]);
 
     const validate = (): boolean => {
         let valid = true;
@@ -64,7 +67,7 @@ const HoofdleidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) =>
                     editedLeiding.email
                 );
             } else {
-                updatedLeiding = await LeidingService.changeGroup(leiding.id, editedLeiding.groep);
+                updatedLeiding = await LeidingService.changeGroup(leiding.id, selected);
             }
             onEdit(updatedLeiding);
             onClose();
@@ -72,6 +75,16 @@ const HoofdleidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) =>
             console.error('Failed to edit leiding:', error);
         }
     };
+
+    useEffect(() => {
+        const fetchGroepen = async () => {
+            const groepen = await GroepService.getAllGroepenWithAuth();
+            const parsedGroepen = await groepen.json();
+            setGroepen(parsedGroepen);
+            console.log(parsedGroepen);
+        };
+        fetchGroepen();
+    }, []);
 
     return (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
@@ -123,12 +136,16 @@ const HoofdleidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) =>
                 ) : (
                     <label className="block mb-3">
                         Groep:
-                        <input
-                            type="text"
-                            className="w-full mt-1 p-2 border border-gray-300 rounded bg-gray-200 shadow-md"
-                            value={editedLeiding.groep}
-                            onChange={(e) => setEditedLeiding({ ...editedLeiding, groep: e.target.value })}
-                        />
+                        <select
+                        onChange={(e) => {setSelected(e.target.value)}}
+                        >
+                            <option value={editedLeiding.groep}>--- selecteer een groep ---</option>
+                            {groepen.map((groep) => (
+                                <option key={groep.id} value={groep.naam}>
+                                    {groep.naam}
+                                </option>
+                            ))}
+                        </select>
                     </label>
                 )}
                 <div className="text-center">

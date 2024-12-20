@@ -18,9 +18,21 @@ const getGroepByNaam = async (naam: string) => {
     });
 }
 
+const getAllGroepenWithAuth = async () => {
+    const token = JSON.parse(sessionStorage.getItem("loggedInUser") || "{}").token;
+    return fetch(process.env.NEXT_PUBLIC_API_URL + `/groep/all`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,	
+        },
+    });
+}
+
 const GroepService = {
     getAllGroepen,
-    getGroepByNaam
+    getGroepByNaam,
+    getAllGroepenWithAuth,
 };
 
 export default GroepService;
