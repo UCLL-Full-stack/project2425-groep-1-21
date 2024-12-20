@@ -2,8 +2,10 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import userService from "@/services/UserService";
 import { StatusMessage } from '@/types';
+import { useTranslation } from "next-i18next";
 
 const LoginForm: React.FC = () => {
+    const { t } = useTranslation();
     const [totem, setTotem] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [totemError, setTotemError] = React.useState("");
@@ -15,11 +17,11 @@ const LoginForm: React.FC = () => {
         let valid = true;
         setPasswordError("");
         if (totem === "") {
-            setTotemError("Totem is verplicht.");
+            setTotemError(t("login.totemRequired"));
             valid = false;
         }
         if (password === "") {
-            setPasswordError("Wachtwoord is verplicht.");
+            setPasswordError(t("login.passwordRequired"));
             valid = false;
         }
         return valid;
@@ -36,7 +38,7 @@ const LoginForm: React.FC = () => {
 
         if (response.status === 200) {
             try {
-                setStatusMessages([{message : ('Login gelukt! Terugsturen naar de startpagina...'), type : "success"}]);
+                setStatusMessages([{message : t("login.successMessage"), type : "success"}]);
                 const data = await response.json();
                 sessionStorage.setItem("loggedInUser", JSON.stringify({
                     'token': data.token,
@@ -47,10 +49,10 @@ const LoginForm: React.FC = () => {
                 setTimeout(() => {
                     router.push('/'); }, 2000);
             } catch (error) {
-                setStatusMessages([{ message: "Server Error; no connection possible", type: "error" }]);
+                setStatusMessages([{ message: t("login.serverError"), type: "error" }]);
             }
         } else {
-            setStatusMessages([{ message: "Login failed", type: "error" }]);
+            setStatusMessages([{ message: t("login.failedMessage"), type: "error" }]);
         }
     };
 
@@ -61,7 +63,7 @@ const LoginForm: React.FC = () => {
                     <input
                         id="totemInput"
                         type="text"
-                        placeholder="Totem"
+                        placeholder={t("login.totemPlaceholder")}
                         value={totem}
                         onChange={(event) => setTotem(event.target.value)}
                         className="w-full p-2 border border-gray-300 rounded"
@@ -72,7 +74,7 @@ const LoginForm: React.FC = () => {
                     <input
                         id="passwordInput"
                         type="password"
-                        placeholder="Wachtwoord"
+                        placeholder={t("login.passwordPlaceholder")}
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         className="w-full p-2 border border-gray-300 rounded"
@@ -80,7 +82,7 @@ const LoginForm: React.FC = () => {
                     {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
                 </div>
                 <button type="submit" className="w-full bg-green-600 text-white py-2 rounded">
-                    Inloggen
+                    {t("login.buttonText")}
                 </button>
             </form>
             {statusMessages && (

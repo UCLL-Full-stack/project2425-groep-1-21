@@ -1,0 +1,85 @@
+{
+    "app": {
+        "title": "Agenda App"
+    },
+
+    "login": {
+        "title": "Login",
+        "pageTitle": "Login",
+        "totemPlaceholder": "Totem",
+        "passwordPlaceholder": "Password",
+        "buttonText": "Login",
+        "totemRequired": "Totem is required.",
+        "passwordRequired": "Password is required.",
+        "successMessage": "Login successful! Redirecting to the homepage...",
+        "serverError": "Server Error; no connection possible",
+        "failedMessage": "Login failed"
+    },
+
+    "overOns": {
+        "title": "About us",
+        "description": "Scouts Overijse is a youth movement for boys aged 6 to 17. For more than 50 years, we have been organizing fun activities on Sunday afternoons from 2 PM to 5 PM. Whether you are poor, rich, small, or tall, everyone is welcome with us!",
+        "takkenTitle": "Sections",
+        "takkenDescription": "Our scouts work with different age groups or 'sections'. An overview:",
+        "takkenList": [
+            "Beavers from 6 to 8 years",
+            "Cubs from 8 to 10 years",
+            "Wolves from 10 to 12 years",
+            "Scouts from 12 to 14 years",
+            "Explorers from 14 to 17 years",
+            "Rovers from 17 to 18 years",
+            "Akabe inclusion work"
+        ],
+        "lokalenTitle": "Locations",
+        "lokalenDescription": "Our locations are well shielded from the street and yet close to the center. The scout building is located behind the Sint-Martinusschools, at Waversesesteenweg 94 in Overijse. To reach the locations, you must follow the driveway of the schools to the top. Our locations are not available for rent.",
+        "uniformTitle": "Uniform",
+        "uniformDescription": "The basic uniform is the same for beavers, cubs, scouts, explorers, rovers, and leaders:",
+        "uniformList": [
+            "beige shirt",
+            "green sweater",
+            "green long or short pants",
+            "beige group scarf with fluorescent edge",
+            "scarf ring"
+        ],
+        "uniformExtra": "The scout uniform and badges are available in the scout shop, better known as the Hopper. For those who do not know where which badge belongs on the scout shirt, it is best to ask for an overview in the scout shop or from a leader. You will receive the annual badge at the beginning of the year during your registration. The group ribbon and scarf badge can be bought from us. We have our second-hand shop at the scouts. With some luck, you will find a suitable shirt, pants, or sweater for your son here.",
+        "kampTitle": "Camp",
+        "kampDescription": "The scout camp takes place annually from July 22 to 31 for the Wolves, Scouts, and Explorers. The Cubs and Beavers go to camp for 7 days. They leave on July 24 and return on July 31. Akabe goes to camp separately from July 15 to 19. Specific information about the camp can be found in the annual camp booklet distributed during the end-of-year barbecue in June."
+    },
+    "verhuur": {
+        "title": "Rental",
+        "description": "Scouts Overijse offers patrol tents and some larger tents for rent at democratic prices. In this brochure, you will find all available options and corresponding prices. If you have any questions, please feel free to contact us.",
+        "challenge": "It can sometimes be a challenge for us to find enough leaders to set up the tents. Therefore, please contact us in time so that we can see if it is practically feasible. We ask for your understanding if setting up the tents is not possible on certain dates. Youth associations can enjoy a discount.",
+        "noRental": "It is contractually not possible for us to rent out our premises.",
+        "conditions": "The general rental conditions apply to every rental.",
+        "contactTitle": "Contact",
+        "contact": [
+            {
+                "name": "Alexander Huvenne (Zwaan)",
+                "email": "E-mail: Zwaan@scoutsoverijse.be",
+                "phone": "Gsm: 0498479561"
+            },
+            {
+                "name": "Tim Vanmeerbeek (Noko)",
+                "email": "E-mail: Noko@scoutsoverijse.be",
+                "phone": "Gsm: 0474011839"
+            }
+        ],
+        "brochureLink": "https://www.scoutsoverijse.be/documenten/Tenten-verhuur-brochure-Scouts-Overijse-2023.pdf",
+        "conditionsLink": "https://www.scoutsoverijse.be/documenten/Algemene-verhuur-voorwaarden-Scouts-Overijse.pdf",
+        "brochureText": "Brochure",
+        "conditionsText": "General rental conditions"
+    },
+
+    "header": {
+        "loginGegevens": "Login details",
+        "home": "Home",
+        "overOns": "About us",
+        "verhuur": "Rental",
+        "login": "Login",
+        "logout": "Logout",
+        "welcome": "Welcome,",
+        "takken": "Sections",
+        "leiding": "Leader"
+    }
+
+}

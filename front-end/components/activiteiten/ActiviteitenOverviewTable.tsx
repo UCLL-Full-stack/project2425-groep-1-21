@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Activiteit } from '@/types';
 import ActiviteitService from '@/services/ActiviteitenService';
@@ -44,11 +44,13 @@ const ActiviteitenOverviewTable: React.FC<Props> = ({ activiteiten: initialActiv
     };
 
     const handleDeleteClick = async (activiteitId: number) => {
-        try {
-            await ActiviteitService.deleteActiviteit(groepNaam as string, activiteitId);
-            setActiviteiten(activiteiten.filter(activiteit => activiteit.id !== activiteitId));
-        } catch (error) {
-            console.error('Failed to delete activiteit:', error);
+        if (window.confirm('Weet je zeker dat je deze activiteit wilt verwijderen?')) {
+            try {
+                await ActiviteitService.deleteActiviteit(groepNaam as string, activiteitId);
+                setActiviteiten(activiteiten.filter(activiteit => activiteit.id !== activiteitId));
+            } catch (error) {
+                console.error('Failed to delete activiteit:', error);
+            }
         }
     };
 

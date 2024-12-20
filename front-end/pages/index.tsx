@@ -1,8 +1,12 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/header';
+import {useTranslation} from "next-i18next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+
 
 const Home: React.FC = () => {
+    const { t } = useTranslation();
     const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
     const [userRole, setUserRole] = useState<string | null>(null);
     const [isClient, setIsClient] = useState(false);
@@ -20,7 +24,7 @@ const Home: React.FC = () => {
     return (
         <div className='flex flex-col min-h-screen'>
             <Head>
-                <title>Agenda</title>
+                <title>{t('app.title')}</title>
                 <meta name="description" content="Agenda app" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
@@ -62,5 +66,15 @@ const Home: React.FC = () => {
         </div>
     );
 }
+
+export const getServerSideProps = async (context: { locale: any; }) => {
+    const {locale} = context;
+
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "nl", ["common"])),
+        },
+    };
+};
 
 export default Home;

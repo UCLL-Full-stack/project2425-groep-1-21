@@ -1,0 +1,85 @@
+{
+    "app": {
+        "title": "Agenda App"
+    },
+
+    "login": {
+        "title": "Inloggen",
+        "pageTitle": "Inloggen",
+        "totemPlaceholder": "Totem",
+        "passwordPlaceholder": "Wachtwoord",
+        "buttonText": "Inloggen",
+        "totemRequired": "Totem is verplicht.",
+        "passwordRequired": "Wachtwoord is verplicht.",
+        "successMessage": "Login gelukt! Terugsturen naar de startpagina...",
+        "serverError": "Serverfout; geen verbinding mogelijk",
+        "failedMessage": "Login mislukt"
+    },
+
+    "overOns": {
+        "title": "Over ons",
+        "description": "Scouts Overijse is een jeugdbeweging voor jongens vanaf 6 tot 17 jaar. Al meer dan 50 jaar organiseren wij leuke activiteiten op zondagnamiddag van 14u tot 17u. Ben je nu arm, rijk, klein of groot, iedereen is bij ons welkom!",
+        "takkenTitle": "Takken",
+        "takkenDescription": "Onze scouts werkt met verschillende leeftijdsgroepen of ‘takken’. Een overzicht:",
+        "takkenList": [
+            "Kapoenen van 6 tot 8 jaar",
+            "Welpen van 8 tot 10 jaar",
+            "Wolven van 10 tot 12 jaar",
+            "Jongverkenners van 12 tot 14 jaar",
+            "Verkenners van 14 tot 17 jaar",
+            "Stam van 17 tot 18 jaar",
+            "Akabe inclusiewerking"
+        ],
+        "lokalenTitle": "Lokalen",
+        "lokalenDescription": "Onze lokalen liggen goed afgeschermd van de straat en toch dicht bij het centrum. Het scoutsgebouw is gelegen achter de Sint-Martinusscholen, ter hoogte van de Waversesesteenweg 94 in Overijse. Om de lokalen te bereiken, moet je de oprit van de scholen tot boven volgen. Onze lokalen zijn niet beschikbaar voor verhuur.",
+        "uniformTitle": "Uniform",
+        "uniformDescription": "Het basisuniform is voor kapoenen, welpen, jongverkenners, verkenners, stam en leiding hetzelfde:",
+        "uniformList": [
+            "beige hemd",
+            "groene trui",
+            "groene lange of korte broek",
+            "beige groepsdas met fluorand",
+            "dasring"
+        ],
+        "uniformExtra": "Het scoutsuniform en de kentekens zijn verkrijgbaar in de scoutsshop, beter bekend als de Hopper. Voor wie niet goed weet waar welk kenteken op het scoutshemd hoort, vraag je best in de scoutsshop of bij een leider naar een overzicht. Het jaarteken krijg je in het begin van het jaar tijdens je inschrijving. Het groepslint en het dasschildje kan je bij ons kopen. Wij hebben op de scouts zelf onze tweedehandswinkel. Met wat geluk vind je hier voor je zoon al een passend hemd, broek of pull.",
+        "kampTitle": "Kamp",
+        "kampDescription": "Het scoutskamp gaat jaarlijks door van 22 tot 31 juli voor de Wolven, Jongverkenners en de Verkenners. De Welpen en de Kapoenen gaan 7 dagen op kamp. Zij vertrekken op 24 juli en komen de 31e juli terug. Akabe gaat apart op kamp van 15 tot 19 juli. Specifieke info over het kamp vind je terug in het jaarlijkse kampboekje dat uitgedeeld wordt tijdens de eindbarbecue in juni."
+    },
+
+    "verhuur": {
+        "title": "Verhuur",
+        "description": "Scouts Overijse biedt patrouilletenten en enkele grotere tenten te huur aan tegen democratische prijzen. In deze brochure vindt u alle beschikbare opties en bijbehorende prijzen. Mocht u vragen hebben, neem dan gerust contact met ons op.",
+        "challenge": "Het kan voor ons soms een uitdaging zijn om voldoende leiding te vinden om de tenten op te zetten. Neem daarom tijdig contact met ons op, zodat we kunnen kijken of het praktisch haalbaar is. We vragen uw begrip als het opzetten van de tenten op bepaalde data niet mogelijk is. Jeugdverenigingen kunnen genieten van een korting.",
+        "noRental": "Het is voor ons contractueel niet mogelijk om onze lokalen te verhuren.",
+        "conditions": "Voor iedere verhuur gelden de algemene verhuurvoorwaarden.",
+        "contactTitle": "Contact",
+        "contact": [
+            {
+                "name": "Alexander Huvenne (Zwaan)",
+                "email": "E-mail: Zwaan@scoutsoverijse.be",
+                "phone": "Gsm: 0498479561"
+            },
+            {
+                "name": "Tim Vanmeerbeek (Noko)",
+                "email": "E-mail: Noko@scoutsoverijse.be",
+                "phone": "Gsm: 0474011839"
+            }
+        ],
+        "brochureLink": "https://www.scoutsoverijse.be/documenten/Tenten-verhuur-brochure-Scouts-Overijse-2023.pdf",
+        "conditionsLink": "https://www.scoutsoverijse.be/documenten/Algemene-verhuur-voorwaarden-Scouts-Overijse.pdf",
+        "brochureText": "Brochure",
+        "conditionsText": "Algemene verhuurvoorwaarden"
+    },
+
+    "header": {
+        "loginGegevens": "Login gegevens",
+        "home": "Home",
+        "overOns": "Over ons",
+        "verhuur": "Verhuur",
+        "login": "Login",
+        "logout": "Uitloggen",
+        "welcome": "Welkom,",
+        "takken": "Takken",
+        "leiding": "Leiding"
+    }
+}

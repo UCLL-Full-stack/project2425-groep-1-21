@@ -5,6 +5,7 @@ import { Activiteit } from '@/types';
 import ActiviteitService from '@/services/ActiviteitenService';
 import { useRouter } from 'next/router';
 import Header from '@/components/header';
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Activiteiten: React.FC = () => {
     const [activiteiten, setActiviteiten] = useState<Array<Activiteit>>();
@@ -59,6 +60,16 @@ const Activiteiten: React.FC = () => {
             </main>
         </>
     );
+};
+
+export const getServerSideProps = async (context: { locale: any; }) => {
+    const {locale} = context;
+
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "nl", ["common"])),
+        },
+    };
 };
 
 export default Activiteiten;

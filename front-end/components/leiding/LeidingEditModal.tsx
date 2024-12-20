@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Leiding } from '@/types';
 import LeidingService from '@/services/LeidingService';
+import LeidingAdminEditModal from './LeidingAdminEditModal';
+import HoofdleidingEditModal from './HoofdleidingEditModal';
 
 type Props = {
     leiding: Leiding;
@@ -11,6 +13,8 @@ type Props = {
 const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
     const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser') || '{}');
     const isAdmin = loggedInUser.role === 'ADMIN';
+    const isHoofdleiding = loggedInUser.role === 'HOOFDLEIDING';
+    const isEditingOwnProfile = loggedInUser.totem === leiding.totem;
 
     const [editedLeiding, setEditedLeiding] = useState({
         naam: leiding.naam,
@@ -60,9 +64,7 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
                 editedLeiding.naam,
                 editedLeiding.voornaam,
                 editedLeiding.telefoon,
-                editedLeiding.email,
-                editedLeiding.rol,
-                editedLeiding.groep
+                editedLeiding.email
             );
             onEdit(updatedLeiding);
             onClose();
@@ -70,6 +72,18 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
             console.error('Failed to edit leiding:', error);
         }
     };
+
+    if (isAdmin && !isEditingOwnProfile) {
+        return (
+            <LeidingAdminEditModal leiding={leiding} onClose={onClose} onEdit={onEdit} />
+        );
+    }
+
+    if (isHoofdleiding && !isEditingOwnProfile) {
+        return (
+            <HoofdleidingEditModal leiding={leiding} onClose={onClose} onEdit={onEdit} />
+        );
+    }
 
     return (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
@@ -115,30 +129,26 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
                     />
                     {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
                 </label>
-                {isAdmin && (
-                    <>
-                        <label className="block mb-3">
-                            Rol:
-                            <select
-                                className="w-full mt-1 p-2 border border-gray-300 rounded bg-gray-200 shadow-md"
-                                value={editedLeiding.rol}
-                                onChange={(e) => setEditedLeiding({ ...editedLeiding, rol: e.target.value })}
-                            >
-                                <option value="HOOFDLEIDING">HOOFDLEIDING</option>
-                                <option value="LEIDING">LEIDING</option>
-                            </select>
-                        </label>
-                        <label className="block mb-3">
-                            Groep:
-                            <input
-                                type="text"
-                                className="w-full mt-1 p-2 border border-gray-300 rounded bg-gray-200 shadow-md"
-                                value={editedLeiding.groep}
-                                onChange={(e) => setEditedLeiding({ ...editedLeiding, groep: e.target.value })}
-                            />
-                        </label>
-                    </>
-                )}
+                <label className="block mb-3">
+                    Rol:
+                    <select
+                        className="w-full mt-1 p-2 border border-gray-300 rounded bg-gray-200 shadow-md"
+                        value={editedLeiding.rol}
+                        onChange={(e) => setEditedLeiding({ ...editedLeiding, rol: e.target.value })}
+                    >
+                        <option value="HOOFDLEIDING">HOOFDLEIDING</option>
+                        <option value="LEIDING">LEIDING</option>
+                    </select>
+                </label>
+                <label className="block mb-3">
+                    Groep:
+                    <input
+                        type="text"
+                        className="w-full mt-1 p-2 border border-gray-300 rounded bg-gray-200 shadow-md"
+                        value={editedLeiding.groep}
+                        onChange={(e) => setEditedLeiding({ ...editedLeiding, groep: e.target.value })}
+                    />
+                </label>
                 <div className="text-center">
                     <button
                         className="bg-green-900 text-white px-4 py-2 rounded shadow-md hover:bg-green-950 mr-2"

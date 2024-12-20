@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import getAllGroepen from '@/services/GroepService';
 import { Groep } from '@/types';
+import Language from "@/components/language/Language";
+import { useTranslation } from "next-i18next";
 import GroepService from '@/services/GroepService';
 
+
 const Header: React.FC = () => {
+    const { t } = useTranslation();
     const router = useRouter();
     const { pathname } = router;
-    const isAdmin = pathname.endsWith('/admin');
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLUListElement>(null);
     const [groepen, setGroepen] = useState<Groep[]>([]);
     const [loggedInUser, setLoggedInUser] = useState<{ totem: string, groep: string } | null>(null);
-
 
     const handleClickOutside = (event: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -52,14 +53,14 @@ const Header: React.FC = () => {
                 <h1 className="text-3xl font-bold">Agenda Scouts Overijse</h1>
                 <nav>
                     <div className="flex space-x-4 items-center">
-                        <Link className="hover:bg-green-600 px-3 py-2 rounded" href={isAdmin ? "/admin" : "/"}>
-                            Login Gegevens
+                        <Link className="hover:bg-green-600 px-3 py-2 rounded" href={"/"}>
+                            {t('header.loginGegevens')}
                         </Link>
 
-                        <Link className="hover:bg-green-600 px-3 py-2 rounded" href="/nieuws">
-                            Home
-                        </Link>
-                      
+                        {(!loggedInUser || loggedInUser.role === 'HOOFDLEIDING') && 
+                        (<Link className="hover:bg-green-600 px-3 py-2 rounded" href="/nieuws">
+                            {t('header.home')}
+                        </Link>)}
                         {loggedInUser ? (
                             <>
                                 <Link
@@ -72,31 +73,38 @@ const Header: React.FC = () => {
                                     className="hover:bg-green-600 px-3 py-2 rounded"
                                     href="/leiding"
                                 >
-                                    Leiding
+                                    {t('header.leiding')}
                                 </Link>
                             </>
                         ) : (
                             <div className="relative">
-                            <button
-                                className="hover:bg-green-600 px-3 py-2 rounded"
-                                onClick={() => setDropdownOpen(!dropdownOpen)}
-                            >
-                                Takken
-                            </button>
-                            {dropdownOpen && (
-                                <ul ref={dropdownRef} className="absolute left-0 bg-green-600 text-white mt-2 rounded shadow-lg z-10">
-                                    {groepen && groepen.map((groep, index) => (
-                                        <li key={index} className="hover:bg-green-700 px-3 py-2">
-                                            <Link href={`/${groep.naam}`}>{groep.naam}</Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                                <button
+                                    className="hover:bg-green-600 px-3 py-2 rounded"
+                                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                                >
+                                    {t('header.takken')}
+                                </button>
+                                {dropdownOpen && (
+                                    <ul ref={dropdownRef} className="absolute left-0 bg-green-600 text-white mt-2 rounded shadow-lg z-10">
+                                        {groepen && groepen.map((groep, index) => (
+                                            <li key={index} className="hover:bg-green-700 px-3 py-2">
+                                                <Link href={`/${groep.naam}`}>{groep.naam}</Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
                         )}
-                        <Link className="hover:bg-green-600 px-3 py-2 rounded" href="/kalender">
-                            Kalender
-                        </Link>
+                        {!loggedInUser && (
+                            <Link className="hover:bg-green-600 px-3 py-2 rounded" href="/overOns">
+                                {t('header.overOns')}
+                            </Link>
+                        )}
+                        {!loggedInUser &&(
+                            <Link className="hover:bg-green-600 px-3 py-2 rounded" href="/verhuur">
+                                {t('header.verhuur')}
+                            </Link>
+                        )}
                         {loggedInUser ? (
                             <>
                                 <a
@@ -104,15 +112,17 @@ const Header: React.FC = () => {
                                     className="hover:bg-green-600 px-3 py-2 rounded"
                                     onClick={handleClick}
                                 >
-                                    Logout
+                                    {t('header.logout')}
                                 </a>
-                                <div>Welcome, {loggedInUser.totem}</div>
+                                <div>{t('header.welcome')} {loggedInUser.totem}</div>
                             </>
                         ) : (
                             <Link className="hover:bg-green-600 px-3 py-2 rounded" href="/login">
-                                Login
+                                {t('header.login')}
                             </Link>
                         )}
+
+                        <Language />
                     </div>
                 </nav>
             </div>

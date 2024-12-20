@@ -5,6 +5,7 @@ import LeidingOverviewTable from '@/components/leiding/LeidingOverviewTable';
 import LeidingEditModal from '@/components/leiding/LeidingEditModal';
 import { Leiding } from '@/types';
 import LeidingService from '@/services/LeidingService';
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Leiders: React.FC = () => {
     const [leiders, setLeiders] = useState<Array<Leiding>>([]);
@@ -77,6 +78,16 @@ const Leiders: React.FC = () => {
             )}
         </>
     );
+};
+
+export const getServerSideProps = async (context: { locale: any; }) => {
+    const { locale } = context;
+
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "nl", ["common"])),
+        },
+    };
 };
 
 export default Leiders;
