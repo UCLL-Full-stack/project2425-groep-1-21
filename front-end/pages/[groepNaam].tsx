@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import { Activiteit, Groep } from "@/types";
 import GroepService from "@/services/GroepService";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Tak: React.FC = () => {
   const [activiteiten, setActiviteiten] = useState<Array<Activiteit>>([]);
@@ -113,6 +114,16 @@ const Tak: React.FC = () => {
       )}
     </>
   );
+};
+
+export const getServerSideProps = async (context: { locale: any; }) => {
+    const { locale } = context;
+
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "nl", ["common"])),
+        },
+    };
 };
 
 export default Tak;

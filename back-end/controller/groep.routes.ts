@@ -107,36 +107,36 @@ groepRouter.get("/", async (req: Request, res: Response, next: NextFunction) => 
     }
 });
 
-// /**
-//  * @swagger
-//  * /groep/{naam}/activiteiten:
-//  *  get:
-//  *    summary: Geeft activiteiten van een groep terug
-//  *    tags:
-//  *     - groep
-//  *    parameters:
-//  *      - in: path
-//  *        name: naam
-//  *        required: true
-//  *        schema:
-//  *          type: string
-//  *        description: De naam van de groep
-//  *    responses:
-//  *      200:
-//  *        description: OK
-//  *        content:
-//  *          application/json:
-//  *            schema:
-//  *              $ref: "#/components/schemas/Activiteit"
-//  */
-// groepRouter.get("/:naam/activiteiten", async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         const groep = await groepService.getActiviteitenForGroep(req.params.naam);
-//         res.status(200).json(groep);
-//     } catch (e) {
-//         next(e);
-//     }
-// });
+/**
+ * @swagger
+ * /groep/{naam}/activiteiten:
+ *  get:
+ *    summary: Geeft activiteiten van een groep terug
+ *    tags:
+ *     - groep
+ *    parameters:
+ *      - in: path
+ *        name: naam
+ *        required: true
+ *        schema:
+ *          type: string
+ *        description: De naam van de groep
+ *    responses:
+ *      200:
+ *        description: OK
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/Activiteit"
+ */
+groepRouter.get("/:naam/activiteiten", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const groep = await groepService.getActiviteitenForGroep(req.params.naam);
+        res.status(200).json(groep);
+    } catch (e) {
+        next(e);
+    }
+});
 
 // /**
 //  * @swagger
