@@ -7,7 +7,7 @@ import HoofdleidingEditModal from './HoofdleidingEditModal';
 type Props = {
     leiding: Leiding;
     onClose: () => void;
-    onEdit: (updatedLeiding: Leiding) => void;
+    onEdit: (leiding: Leiding) => void;
 };
 
 const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
@@ -21,7 +21,6 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
         voornaam: leiding.voornaam,
         telefoon: leiding.telefoon,
         email: leiding.email,
-        rol: leiding.rol,
         groep: leiding.groep,
     });
     const [nameError, setNameError] = useState('');

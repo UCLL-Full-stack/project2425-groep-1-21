@@ -33,13 +33,6 @@ const Leiders: React.FC = () => {
         setShowEditModal(true);
     };
 
-    const handleEditLeiding = (updatedLeiding: Leiding) => {
-        setLeiders(leiders.map(lid => 
-            lid.id === updatedLeiding.id ? updatedLeiding : lid
-        ));
-        setShowEditModal(false);
-    };
-
     const handleDelete = async (leidingId: number) => {
         try {
             await LeidingService.deleteLeiding(leidingId);
@@ -77,13 +70,6 @@ const Leiders: React.FC = () => {
                     )}
                 </section>
             </main>
-            {showEditModal && selectedLeiding && (
-                <LeidingEditModal
-                    leiding={selectedLeiding}
-                    onClose={() => saved(true)}
-                    onEdit={handleEditLeiding}
-                />
-            )}
         </>
     );
 };
