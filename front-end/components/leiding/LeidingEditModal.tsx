@@ -3,6 +3,7 @@ import { Leiding } from '@/types';
 import LeidingService from '@/services/LeidingService';
 import LeidingAdminEditModal from './LeidingAdminEditModal';
 import HoofdleidingEditModal from './HoofdleidingEditModal';
+import ChangePasswordModal from './ChangePasswordModal';
 
 type Props = {
     leiding: Leiding;
@@ -27,6 +28,7 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
     const [surnameError, setSurnameError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [showChangePasswordModal, setShowChangePasswordModal] = useState<boolean>(false);
 
     const validate = (): boolean => {
         let valid = true;
@@ -53,6 +55,10 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
         }
         return valid;
     };
+
+    const changePassword = () => {
+        setShowChangePasswordModal(true);
+    }
 
     const editLeiding = async () => {
         if (!validate()) return;
@@ -132,11 +138,18 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
                     Groep:
                     <input
                         type="text"
+                        readOnly
                         className="w-full mt-1 p-2 border border-gray-300 rounded bg-gray-200 shadow-md"
                         value={editedLeiding.groep}
                         onChange={(e) => setEditedLeiding({ ...editedLeiding, groep: e.target.value })}
                     />
                 </label>
+                <div className="text-center mb-2">
+                    <button 
+                        className="bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600"
+                        onClick={() => changePassword()}>Verander Passwoord
+                    </button>
+                </div>
                 <div className="text-center">
                     <button
                         className="bg-green-900 text-white px-4 py-2 rounded shadow-md hover:bg-green-950 mr-2"
@@ -148,6 +161,13 @@ const LeidingEditModal: React.FC<Props> = ({ leiding, onClose, onEdit }) => {
                     </button>
                 </div>
             </div>
+            {showChangePasswordModal && (
+                <ChangePasswordModal
+                    leiding={leiding}
+                    onClose={() => setShowChangePasswordModal(false)}
+                    onEdit={onEdit}
+                />
+            )}
         </div>
     );
 };

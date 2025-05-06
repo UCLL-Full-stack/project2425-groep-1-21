@@ -108,6 +108,26 @@ const changeGroup = async (id: number, groepNaam: string) => {
   return response.json();
 };
 
+const changePassword = async (totem: string, pass: string) => {
+  const token = JSON.parse(sessionStorage.getItem("loggedInUser") || "{}").token;
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/leiding`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+          totem,
+          wachtwoord: pass
+      }),
+  }); 
+
+  if (!response.ok) {
+      throw new Error("Wachtwoord aanpassen mislukt.");
+  }
+  return "Wachtwoord is aangepast";
+};
+
 const LeidingService = {
   getLeiding,
   deleteLeiding,
@@ -115,6 +135,7 @@ const LeidingService = {
   addLeiding,
   changeRole,
   changeGroup,
+  changePassword
 };
 
 export default LeidingService;

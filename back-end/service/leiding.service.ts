@@ -80,8 +80,11 @@ const updateLeiding = async (leiding: Leiding, rol: Rol, totem: string): Promise
         let truePass = '';
         if (leiding.getWachtwoord() === '' || leiding.getWachtwoord() === null || leiding.getWachtwoord() === undefined) {
             truePass = leidingDB.getWachtwoord();
-        } else if (leiding.getWachtwoord() !== '' && leiding.getWachtwoord() !== leidingDB.getWachtwoord()) {
-            truePass = await bcrypt.hash(leiding.getWachtwoord(), 12);
+        } else if (leiding.getWachtwoord() !== '') {
+            const isSame = await bcrypt.compare(leiding.getWachtwoord(), leidingDB.getWachtwoord());
+            if (!isSame) {
+                truePass = await bcrypt.hash(leiding.getWachtwoord(), 12);
+            }
         }
         leiding.setTotem(leidingDB.getTotem());
         const trueLeiding = new Leiding({

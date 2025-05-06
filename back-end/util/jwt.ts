@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import { Rol } from '../types';
 
 const generateSWTtoken = (totem: string, role: Rol): string => {
@@ -6,7 +6,7 @@ const generateSWTtoken = (totem: string, role: Rol): string => {
     if (!secret) {
         throw new Error('JWT_SECRET is not defined.');
     }
-    return jwt.sign({ totem: totem, rol: role }, secret, { expiresIn: `${process.env.JWT_EXPIRES_HOURS}h` });
+    return jwt.sign({ totem: totem, rol: role }, secret as Secret, { expiresIn: `${Number(process.env.JWT_EXPIRES_HOURS)}h` });
 };
 
 export default generateSWTtoken ;

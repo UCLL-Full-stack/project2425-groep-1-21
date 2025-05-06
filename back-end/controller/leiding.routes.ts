@@ -234,7 +234,7 @@ leidingRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
 leidingRouter.put('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.headers.authorization?.split(' ')[1]; 
-
+ 
         const secret = process.env.JWT_SECRET || 'default_secret';
         const decoded = jwt.verify(token? token: "", secret) as { totem: string, rol: Rol};
         const leiding = new Leiding({
